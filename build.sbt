@@ -18,22 +18,25 @@ libraryDependencies ++= Seq(
     "com.codahale.metrics" % "metrics-core" % "3.0.1",
     "com.codahale.metrics" % "metrics-json" % "3.0.1",
     "com.codahale.metrics" % "metrics-jvm" % "3.0.1",
-    "com.typesafe.play" %% "play" % "2.2.1" % "provided",
+    "com.typesafe.play" %% "play" % "2.2.3" % "provided",
     //test
-    "com.typesafe.play" %% "play-test" % "2.2.1" % "test",
+    "com.typesafe.play" %% "play-test" % "2.2.3" % "test",
     "org.specs2" % "specs2_2.10" % "1.13" % "test",
     "org.mockito" % "mockito-all" % "1.9.5" % "test"
 )
 
 publishMavenStyle := true
 
-publishTo <<= version { (v: String) =>
-  val nexus = "https://oss.sonatype.org/"
-  if (v.trim.endsWith("SNAPSHOT"))
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases" at nexus + "service/local/staging/deploy/maven2")
-}
+publishTo := Some(Resolver.file("http://schwartech.github.com/m2repo/releases/",
+  new File("/Users/jeff/dev/myprojects/schwartech.github.com/m2repo/releases")))
+
+//publishTo <<= version { (v: String) =>
+//  val nexus = "https://oss.sonatype.org/"
+//  if (v.trim.endsWith("SNAPSHOT"))
+//    Some("snapshots" at nexus + "content/repositories/snapshots")
+//  else
+//    Some("releases" at nexus + "service/local/staging/deploy/maven2")
+//}
 
 pomIncludeRepository := { _ => false }
 
